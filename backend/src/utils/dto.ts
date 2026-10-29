@@ -1,7 +1,8 @@
-export type user {
+export interface user {
+  id?: number;
   name: string;
   email: string;
-  mob?: string;
-  password: string;
-  age?: number;
+  password?: string;
+  mob?: string | null;
+  age?: number | null;
 }
