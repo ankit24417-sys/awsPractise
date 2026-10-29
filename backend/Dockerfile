@@ -1,4 +1,4 @@
-
+# Stage 1: Builder
 FROM node:20-alpine AS builder
 WORKDIR /app
 
@@ -17,11 +17,11 @@ ENV NODE_ENV=production
 
 COPY package*.json ./
 COPY prisma ./prisma/
+
 RUN npm ci --only=production
+RUN npx prisma generate
 
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 EXPOSE 5000
 
